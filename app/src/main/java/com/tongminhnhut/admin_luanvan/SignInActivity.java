@@ -1,5 +1,6 @@
 package com.tongminhnhut.admin_luanvan;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -7,6 +8,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.tongminhnhut.admin_luanvan.BLL.CheckConnection;
+import com.tongminhnhut.admin_luanvan.BLL.HomeActivity;
 import com.tongminhnhut.admin_luanvan.DAL.SignInDAL;
 
 import dmax.dialog.SpotsDialog;
@@ -33,7 +35,8 @@ public class SignInActivity extends AppCompatActivity {
                 String pass = edtPass.getText().toString();
                 final SpotsDialog dialog = new SpotsDialog(SignInActivity.this, "Loading . . .");
                 if (CheckConnection.isConnectedInternet(getApplicationContext())){
-                    SignInDAL.signIn(getApplicationContext(),phone, pass, dialog);
+                    Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                    SignInDAL.signIn(getApplicationContext(),phone, pass, dialog, intent);
                 } else {
                     Toast.makeText(SignInActivity.this, "Vui lòng kiểm tra kết nối !", Toast.LENGTH_SHORT).show();
                 }

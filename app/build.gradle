@@ -28,7 +28,7 @@ dependencies {
     //recyclerView
     implementation 'com.android.support:recyclerview-v7:27.0.2'
     implementation 'com.firebaseui:firebase-ui-database:3.1.2'
-//    implementation 'com.firebaseui:firebase-ui-database:4.0.1'
+    //    implementation 'com.firebaseui:firebase-ui-database:4.0.1'
     //dialog
     implementation 'com.github.d-max:spots-dialog:0.7@aar'
     // editText
@@ -48,6 +48,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation 'com.android.support:design:27.0.2'
+    implementation 'com.squareup.picasso:picasso:2.3.2'
 }
 
 apply plugin: 'com.google.gms.google-services'

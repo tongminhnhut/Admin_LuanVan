@@ -1,6 +1,7 @@
 package com.tongminhnhut.admin_luanvan.DAL;
 
 import android.content.Context;
+import android.content.Intent;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -17,7 +18,7 @@ public class SignInDAL {
     public static User currentUser ;
     static DatabaseReference db_User ;
 
-    public static void signIn (final Context context, final String phone, final String pass, final SpotsDialog dialog){
+    public static void signIn (final Context context, final String phone, final String pass, final SpotsDialog dialog, final Intent intent){
         db_User = FirebaseDatabase.getInstance().getReference("User");
         dialog.show();
         db_User.addValueEventListener(new ValueEventListener() {
@@ -30,6 +31,9 @@ public class SignInDAL {
                     if (Boolean.parseBoolean(user.getIsStaff())){
                         if (user.getPassword().equals(MD5.md5(pass))){
                             Toast.makeText(context, "Đăng nhập thành công !", Toast.LENGTH_SHORT).show();
+                            intent.setFlags(intent.FLAG_ACTIVITY_NEW_TASK);
+                            currentUser = user;
+                            context.startActivity(intent);
                         }else {
                             Toast.makeText(context, "Sai tên đăng nhập hoặc mật khẩu !", Toast.LENGTH_SHORT).show();
                         }
