@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.tongminhnhut.admin_luanvan.DAL.LoadMenuHomeDAL;
 import com.tongminhnhut.admin_luanvan.DAL.SignInDAL;
 import com.tongminhnhut.admin_luanvan.DAL.SignUpDAL;
+import com.tongminhnhut.admin_luanvan.DongHoActivity;
 import com.tongminhnhut.admin_luanvan.R;
 
 import org.w3c.dom.Text;
@@ -84,8 +85,8 @@ public class HomeActivity extends AppCompatActivity
             @Override
             public void onRefresh() {
                 if (CheckConnection.isConnectedInternet(HomeActivity.this)){
-//                    Intent intent = new Intent(getApplicationContext(), DongHoActivity.class);
-                    LoadMenuHomeDAL.loadMenu(getApplicationContext(),recyclerView, swipeRefreshLayout);
+                    Intent intent = new Intent(getApplicationContext(), DongHoActivity.class);
+                    LoadMenuHomeDAL.loadMenu(getApplicationContext(),recyclerView, swipeRefreshLayout, intent);
                 }else {
                     Toast.makeText(HomeActivity.this, "Vui lòng kiểm tra internet", Toast.LENGTH_SHORT).show();
                     return;
@@ -97,8 +98,8 @@ public class HomeActivity extends AppCompatActivity
             @Override
             public void run() {
                 if (CheckConnection.isConnectedInternet(HomeActivity.this)){
-//                    Intent intent = new Intent(getApplicationContext(), DongHoActivity.class);
-                    LoadMenuHomeDAL.loadMenu(getApplicationContext(),recyclerView, swipeRefreshLayout);
+                    Intent intent = new Intent(getApplicationContext(), DongHoActivity.class);
+                    LoadMenuHomeDAL.loadMenu(getApplicationContext(),recyclerView, swipeRefreshLayout, intent);
 
                 }else {
                     Toast.makeText(HomeActivity.this, "Vui lòng kiểm tra internet", Toast.LENGTH_SHORT).show();
@@ -134,9 +135,7 @@ public class HomeActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+
 
         return super.onOptionsItemSelected(item);
     }

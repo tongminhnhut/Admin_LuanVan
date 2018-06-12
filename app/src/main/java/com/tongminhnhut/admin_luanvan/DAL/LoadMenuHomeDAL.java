@@ -1,6 +1,7 @@
 package com.tongminhnhut.admin_luanvan.DAL;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
@@ -22,7 +23,7 @@ import com.tongminhnhut.admin_luanvan.ViewHolder.HomeViewHolder;
 public class LoadMenuHomeDAL extends HomeActivity {
     static DatabaseReference db_Menu ;
     static FirebaseRecyclerAdapter<Category, HomeViewHolder> adapter ;
-    public static void loadMenu(final Context context, final RecyclerView recyclerView, final SwipeRefreshLayout swipeRefreshLayout){
+    public static void loadMenu(final Context context, final RecyclerView recyclerView, final SwipeRefreshLayout swipeRefreshLayout, final Intent intent){
         db_Menu = FirebaseDatabase.getInstance().getReference("Catergory");
         FirebaseRecyclerOptions<Category> options = new FirebaseRecyclerOptions.Builder<Category>()
                 .setQuery(db_Menu, Category.class)
@@ -36,6 +37,9 @@ public class LoadMenuHomeDAL extends HomeActivity {
                 holder.setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onClick(View view, int position, boolean isLongClick) {
+                        intent.putExtra("ID", adapter.getRef(position).getKey());
+                        intent.addFlags(intent.FLAG_ACTIVITY_NEW_TASK);
+                        context.startActivity(intent);
 
                     }
                 });
