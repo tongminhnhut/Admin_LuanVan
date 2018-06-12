@@ -13,8 +13,10 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
-import com.tongminhnhut.admin_luanvan.BLL.HomeActivity;
+import com.tongminhnhut.admin_luanvan.HomeActivity;
 import com.tongminhnhut.admin_luanvan.BLL.ItemClickListener;
 import com.tongminhnhut.admin_luanvan.Model.Category;
 import com.tongminhnhut.admin_luanvan.R;
@@ -22,6 +24,7 @@ import com.tongminhnhut.admin_luanvan.ViewHolder.HomeViewHolder;
 
 public class LoadMenuHomeDAL extends HomeActivity {
     static DatabaseReference db_Menu ;
+    static StorageReference image = FirebaseStorage.getInstance().getReference("images/");
     static FirebaseRecyclerAdapter<Category, HomeViewHolder> adapter ;
     public static void loadMenu(final Context context, final RecyclerView recyclerView, final SwipeRefreshLayout swipeRefreshLayout, final Intent intent){
         db_Menu = FirebaseDatabase.getInstance().getReference("Catergory");

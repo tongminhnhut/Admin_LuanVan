@@ -1,6 +1,5 @@
 package com.tongminhnhut.admin_luanvan;
 
-import android.content.Intent;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,9 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
 import com.tongminhnhut.admin_luanvan.BLL.CheckConnection;
-import com.tongminhnhut.admin_luanvan.BLL.HomeActivity;
 import com.tongminhnhut.admin_luanvan.DAL.LoadDongHoDAL;
-import com.tongminhnhut.admin_luanvan.DAL.LoadMenuHomeDAL;
 
 public class DongHoActivity extends AppCompatActivity {
     SwipeRefreshLayout swipeRefreshLayout ;

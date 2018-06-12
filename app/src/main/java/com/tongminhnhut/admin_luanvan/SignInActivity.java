@@ -8,7 +8,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.tongminhnhut.admin_luanvan.BLL.CheckConnection;
-import com.tongminhnhut.admin_luanvan.BLL.HomeActivity;
 import com.tongminhnhut.admin_luanvan.DAL.SignInDAL;
 
 import dmax.dialog.SpotsDialog;

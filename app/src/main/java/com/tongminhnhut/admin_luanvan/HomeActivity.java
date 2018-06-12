@@ -1,12 +1,16 @@
-package com.tongminhnhut.admin_luanvan.BLL;
+package com.tongminhnhut.admin_luanvan;
 
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -16,16 +20,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
+import com.tongminhnhut.admin_luanvan.BLL.CheckConnection;
+import com.tongminhnhut.admin_luanvan.DAL.LoadImageDAL;
 import com.tongminhnhut.admin_luanvan.DAL.LoadMenuHomeDAL;
 import com.tongminhnhut.admin_luanvan.DAL.SignInDAL;
-import com.tongminhnhut.admin_luanvan.DAL.SignUpDAL;
-import com.tongminhnhut.admin_luanvan.DongHoActivity;
-import com.tongminhnhut.admin_luanvan.R;
+import com.tongminhnhut.admin_luanvan.Model.Category;
 
-import org.w3c.dom.Text;
+
+import info.hoang8f.widget.FButton;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -34,6 +41,14 @@ public class HomeActivity extends AppCompatActivity
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
     TextView txtFullname ;
+    FloatingActionButton btnAdd ;
+
+    EditText edtName;
+    FButton btnUp, btnSelect ;
+
+    Category newCategory ;
+    Uri saveUri;
+    private final int PICK_IMAGE_REQUEST = 71;
 
 
 
@@ -68,12 +83,22 @@ public class HomeActivity extends AppCompatActivity
         View headerView = navigationView.getHeaderView(0);
         txtFullname = headerView.findViewById(R.id.txtFullName);
         txtFullname.setText(SignInDAL.currentUser.getName());
+        btnAdd = findViewById(R.id.btnAdd_DongHo);
+
 
         addEvents();
 
 
 
 
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        if (item.getTitle().equals("Delete")){
+//            new Database(this).removeItemCart(listOrder.get());
+        }
+        return super.onContextItemSelected(item);
     }
 
     private void addEvents() {
@@ -108,6 +133,79 @@ public class HomeActivity extends AppCompatActivity
             }
         });
 
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDialogAdd();
+            }
+        });
+
+    }
+
+    private void showImage() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Select picture"), PICK_IMAGE_REQUEST);
+
+    }
+
+
+    private void showDialogAdd() {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(HomeActivity.this);
+        alertDialog.setTitle("Thêm mới");
+        alertDialog.setMessage("Điền thông tin");
+
+        LayoutInflater inflater = this.getLayoutInflater();
+        View view = inflater.inflate(R.layout.dialog_add_menu, null);
+
+        edtName = view.findViewById(R.id.edtName_dialogAdd);
+        btnSelect = view.findViewById(R.id.btnSlect_dialogAdd);
+        btnUp = view.findViewById(R.id.btnUpload_dialogAdd);
+
+        btnSelect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showImage();
+            }
+        });
+
+        btnUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ProgressDialog progressDialog = new ProgressDialog(HomeActivity.this);
+                LoadImageDAL.upLoadImage(saveUri, getApplicationContext(), edtName, progressDialog);
+            }
+        });
+        alertDialog.setView(view);
+        alertDialog.setIcon(R.drawable.ic_shopping_cart_black_24dp);
+
+        //set button Yes/ No
+        alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+
+        alertDialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        alertDialog.show();
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode ==RESULT_OK && data!=null && data.getData()!=null)
+        {
+            saveUri=data.getData();
+            btnSelect.setText("Image Selected");
+        }
     }
 
     @Override
