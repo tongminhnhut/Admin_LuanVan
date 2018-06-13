@@ -1,15 +1,19 @@
 package com.tongminhnhut.admin_luanvan;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -25,14 +29,23 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.tongminhnhut.admin_luanvan.BLL.CheckConnection;
-import com.tongminhnhut.admin_luanvan.DAL.LoadImageDAL;
+import com.tongminhnhut.admin_luanvan.BLL.Common;
+import com.tongminhnhut.admin_luanvan.DAL.CategoryDAL;
+import com.tongminhnhut.admin_luanvan.DAL.LoadDongHoDAL;
 import com.tongminhnhut.admin_luanvan.DAL.LoadMenuHomeDAL;
 import com.tongminhnhut.admin_luanvan.DAL.SignInDAL;
 import com.tongminhnhut.admin_luanvan.Model.Category;
+import com.tongminhnhut.admin_luanvan.ViewHolder.HomeViewHolder;
 
 
 import info.hoang8f.widget.FButton;
+
+import static com.tongminhnhut.admin_luanvan.DAL.CategoryDAL.db_Category;
+
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -42,12 +55,12 @@ public class HomeActivity extends AppCompatActivity
     RecyclerView.LayoutManager layoutManager;
     TextView txtFullname ;
     FloatingActionButton btnAdd ;
-
     EditText edtName;
     FButton btnUp, btnSelect ;
 
     Category newCategory ;
     Uri saveUri;
+    DrawerLayout drawer;
     private final int PICK_IMAGE_REQUEST = 71;
 
 
@@ -62,7 +75,7 @@ public class HomeActivity extends AppCompatActivity
 
        
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -71,7 +84,7 @@ public class HomeActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        //init View
+
         swipeRefreshLayout = findViewById(R.id.swipeLayout_Home);
         txtFullname = findViewById(R.id.txtFullName);
         recyclerView = findViewById(R.id.recyclerView_Home);
@@ -95,8 +108,13 @@ public class HomeActivity extends AppCompatActivity
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
-        if (item.getTitle().equals("Delete")){
-//            new Database(this).removeItemCart(listOrder.get());
+        if (item.getTitle().equals(Common.Update)){
+            showUpDateDialog(LoadMenuHomeDAL.adapter.getRef(item.getOrder()).getKey(), LoadMenuHomeDAL.adapter.getItem(item.getOrder()));
+
+        }else if (item.getTitle().equals(Common.Delete)){
+            db_Category.child(LoadMenuHomeDAL.adapter.getRef(item.getOrder()).getKey()).removeValue();
+            Snackbar.make(drawer,"Danh mục "+CategoryDAL.category.getName()+ " đã xoá ", Snackbar.LENGTH_LONG ).show();
+
         }
         return super.onContextItemSelected(item);
     }
@@ -152,7 +170,7 @@ public class HomeActivity extends AppCompatActivity
 
 
     private void showDialogAdd() {
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(HomeActivity.this);
+        final AlertDialog.Builder alertDialog = new AlertDialog.Builder(HomeActivity.this);
         alertDialog.setTitle("Thêm mới");
         alertDialog.setMessage("Điền thông tin");
 
@@ -174,7 +192,7 @@ public class HomeActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 ProgressDialog progressDialog = new ProgressDialog(HomeActivity.this);
-                LoadImageDAL.upLoadImage(saveUri, getApplicationContext(), edtName, progressDialog);
+                CategoryDAL.upLoadImage(saveUri, getApplicationContext(), edtName, progressDialog);
             }
         });
         alertDialog.setView(view);
@@ -184,6 +202,8 @@ public class HomeActivity extends AppCompatActivity
         alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                CategoryDAL.addNew(drawer);
 
             }
         });
@@ -197,6 +217,63 @@ public class HomeActivity extends AppCompatActivity
         alertDialog.show();
 
     }
+
+    //update Dialog
+    private void showUpDateDialog(final String key, final Category item) {
+        AlertDialog.Builder mDialog = new AlertDialog.Builder(this);
+        mDialog.setTitle("Cập nhật thông tin");
+        mDialog.setMessage("Điền thông tin");
+
+        LayoutInflater inflater = this.getLayoutInflater();
+        View menu_layout = inflater.inflate(R.layout.dialog_add_menu, null);
+        edtName = menu_layout.findViewById(R.id.edtName_dialogAdd);
+        btnSelect = menu_layout.findViewById(R.id.btnSlect_dialogAdd);
+        btnUp = menu_layout.findViewById(R.id.btnUpload_dialogAdd);
+
+        // set Name default
+        edtName.setText(item.getName());
+
+        btnSelect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showImage();
+            }
+        });
+
+        btnUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final ProgressDialog progressDialog = new ProgressDialog(HomeActivity.this);
+                CategoryDAL.changeImage(item, saveUri, getApplicationContext(), progressDialog);
+            }
+        });
+
+        mDialog.setView(menu_layout);
+        mDialog.setIcon(R.drawable.ic_shopping_cart_black_24dp);
+
+        //set Button
+        mDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+
+                // Cập nhật lại thông tin loại menu
+                item.setName(edtName.getText().toString());
+                db_Category.child(key).setValue(item);
+            }
+        });
+
+        mDialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+
+            }
+        });
+
+        mDialog.show();
+    }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

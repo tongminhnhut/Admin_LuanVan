@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.tongminhnhut.admin_luanvan.BLL.Common;
 import com.tongminhnhut.admin_luanvan.BLL.ItemClickListener;
 import com.tongminhnhut.admin_luanvan.R;
 
@@ -24,6 +25,7 @@ public class HomeViewHolder extends RecyclerView.ViewHolder implements
         imgHinh = itemView.findViewById(R.id.imgDongHo_itemHome);
 
         itemView.setOnClickListener(this);
+        itemView.setOnCreateContextMenuListener(this);
 
     }
 
@@ -40,8 +42,8 @@ public class HomeViewHolder extends RecyclerView.ViewHolder implements
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         menu.setHeaderTitle("Vui lòng chọn !");
-        menu.add(0,0,getAdapterPosition(),"Cập nhật thông tin");
-        menu.add(0,1,getAdapterPosition(),"Xoá sản phẩm");
+        menu.add(0,0,getAdapterPosition(), Common.Update);
+        menu.add(0,1,getAdapterPosition(),Common.Delete);
 
     }
 }

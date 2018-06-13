@@ -1,13 +1,17 @@
 package com.tongminhnhut.admin_luanvan.DAL;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -16,16 +20,19 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
+import com.tongminhnhut.admin_luanvan.BLL.Common;
 import com.tongminhnhut.admin_luanvan.HomeActivity;
 import com.tongminhnhut.admin_luanvan.BLL.ItemClickListener;
 import com.tongminhnhut.admin_luanvan.Model.Category;
 import com.tongminhnhut.admin_luanvan.R;
 import com.tongminhnhut.admin_luanvan.ViewHolder.HomeViewHolder;
 
+import info.hoang8f.widget.FButton;
+
 public class LoadMenuHomeDAL extends HomeActivity {
     static DatabaseReference db_Menu ;
     static StorageReference image = FirebaseStorage.getInstance().getReference("images/");
-    static FirebaseRecyclerAdapter<Category, HomeViewHolder> adapter ;
+    public static FirebaseRecyclerAdapter<Category, HomeViewHolder> adapter ;
     public static void loadMenu(final Context context, final RecyclerView recyclerView, final SwipeRefreshLayout swipeRefreshLayout, final Intent intent){
         db_Menu = FirebaseDatabase.getInstance().getReference("Catergory");
         FirebaseRecyclerOptions<Category> options = new FirebaseRecyclerOptions.Builder<Category>()
@@ -68,4 +75,7 @@ public class LoadMenuHomeDAL extends HomeActivity {
         super.onStop();
         adapter.startListening();
     }
+
+
+
 }
