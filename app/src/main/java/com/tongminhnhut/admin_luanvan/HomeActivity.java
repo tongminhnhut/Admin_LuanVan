@@ -311,7 +311,7 @@ public class HomeActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_order) {
-            // Handle the camera action
+            startActivity(new Intent(getApplicationContext(), OrderStatusActivity.class));
         } else if (id == R.id.nav_Quanly) {
 
         } else if (id == R.id.nav_Logout) {
