@@ -28,7 +28,7 @@
         android:layout_marginRight="10dp"
         android:layout_gravity="bottom|end"
         app:backgroundTint="@android:color/white"
-        android:id="@+id/btnAdd_DongHo"
+        android:id="@+id/btnAdd_Home"
         android:src="@drawable/ic_playlist_add_black_24dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />

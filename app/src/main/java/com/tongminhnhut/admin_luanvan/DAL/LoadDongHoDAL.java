@@ -14,13 +14,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.squareup.picasso.Picasso;
+import com.tongminhnhut.admin_luanvan.BLL.ItemClickListener;
 import com.tongminhnhut.admin_luanvan.Model.DongHo;
 import com.tongminhnhut.admin_luanvan.R;
 import com.tongminhnhut.admin_luanvan.ViewHolder.DongHoViewholder;
 
 public class LoadDongHoDAL {
-    static DatabaseReference db_DongHo ;
-    static FirebaseRecyclerAdapter<DongHo, DongHoViewholder> adapter;
+    public static DatabaseReference db_DongHo ;
+    public static FirebaseRecyclerAdapter<DongHo, DongHoViewholder> adapter;
     public static void loadDongHo (final String ID, final Context context, final RecyclerView recyclerView, final SwipeRefreshLayout swipeRefreshLayout){
         db_DongHo = FirebaseDatabase.getInstance().getReference("DongHo");
         Query query = db_DongHo.orderByChild("menuId").equalTo(ID) ;
@@ -34,6 +35,12 @@ public class LoadDongHoDAL {
                 holder.txtTen.setText(model.getName());
                 Picasso.with(context).load(model.getImage())
                         .into(holder.imgHinh);
+                holder.setItemClickListener(new ItemClickListener() {
+                    @Override
+                    public void onClick(View view, int position, boolean isLongClick) {
+
+                    }
+                });
             }
 
             @Override

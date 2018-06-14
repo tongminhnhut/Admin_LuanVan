@@ -1,6 +1,8 @@
 package com.tongminhnhut.admin_luanvan.Model;
 
-public class DongHo {
+import java.io.Serializable;
+
+public class DongHo implements Serializable {
     private String Name;
     private String Image ;
     private String Gia;

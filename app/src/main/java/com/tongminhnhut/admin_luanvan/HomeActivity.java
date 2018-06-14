@@ -1,19 +1,16 @@
 package com.tongminhnhut.admin_luanvan;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -27,19 +24,12 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
-
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.tongminhnhut.admin_luanvan.BLL.CheckConnection;
 import com.tongminhnhut.admin_luanvan.BLL.Common;
 import com.tongminhnhut.admin_luanvan.DAL.CategoryDAL;
-import com.tongminhnhut.admin_luanvan.DAL.LoadDongHoDAL;
 import com.tongminhnhut.admin_luanvan.DAL.LoadMenuHomeDAL;
 import com.tongminhnhut.admin_luanvan.DAL.SignInDAL;
 import com.tongminhnhut.admin_luanvan.Model.Category;
-import com.tongminhnhut.admin_luanvan.ViewHolder.HomeViewHolder;
 
 
 import info.hoang8f.widget.FButton;
@@ -58,7 +48,6 @@ public class HomeActivity extends AppCompatActivity
     EditText edtName;
     FButton btnUp, btnSelect ;
 
-    Category newCategory ;
     Uri saveUri;
     DrawerLayout drawer;
     private final int PICK_IMAGE_REQUEST = 71;
@@ -96,7 +85,7 @@ public class HomeActivity extends AppCompatActivity
         View headerView = navigationView.getHeaderView(0);
         txtFullname = headerView.findViewById(R.id.txtFullName);
         txtFullname.setText(SignInDAL.currentUser.getName());
-        btnAdd = findViewById(R.id.btnAdd_DongHo);
+        btnAdd = findViewById(R.id.btnAdd_Home);
 
 
         addEvents();
@@ -196,7 +185,7 @@ public class HomeActivity extends AppCompatActivity
             }
         });
         alertDialog.setView(view);
-        alertDialog.setIcon(R.drawable.ic_shopping_cart_black_24dp);
+        alertDialog.setIcon(R.drawable.ic_library_add_black_24dp);
 
         //set button Yes/ No
         alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
