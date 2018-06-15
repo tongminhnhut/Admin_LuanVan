@@ -30,6 +30,7 @@ import com.tongminhnhut.admin_luanvan.DAL.CategoryDAL;
 import com.tongminhnhut.admin_luanvan.DAL.LoadMenuHomeDAL;
 import com.tongminhnhut.admin_luanvan.DAL.SignInDAL;
 import com.tongminhnhut.admin_luanvan.Model.Category;
+import com.tongminhnhut.admin_luanvan.Server.ListenOrder;
 
 
 import info.hoang8f.widget.FButton;
@@ -90,6 +91,8 @@ public class HomeActivity extends AppCompatActivity
 
         addEvents();
 
+        Intent intent = new Intent(getApplicationContext(), ListenOrder.class);
+        startService(intent);
 
 
 

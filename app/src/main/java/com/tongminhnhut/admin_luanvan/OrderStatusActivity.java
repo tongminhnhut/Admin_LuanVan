@@ -42,8 +42,7 @@ public class OrderStatusActivity extends AppCompatActivity {
 
         addEvent();
 
-        Intent intent = new Intent(getApplicationContext(), ListenOrder.class);
-        startService(intent);
+
     }
 
     private void addEvent() {

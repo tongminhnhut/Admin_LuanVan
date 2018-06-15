@@ -18,6 +18,8 @@ import com.tongminhnhut.admin_luanvan.Model.RequestOrder;
 import com.tongminhnhut.admin_luanvan.OrderStatusActivity;
 import com.tongminhnhut.admin_luanvan.R;
 
+import java.util.Random;
+
 public class ListenOrder extends Service implements ChildEventListener {
 
     DatabaseReference db_Request ;
@@ -51,13 +53,16 @@ public class ListenOrder extends Service implements ChildEventListener {
     @Override
     public void onChildChanged(DataSnapshot dataSnapshot, String s) {
         RequestOrder requestOrder = dataSnapshot.getValue(RequestOrder.class);
-        showNotification(dataSnapshot.getKey(), requestOrder);
+        if (requestOrder.getStatus().equals("0")){
+            showNotification(dataSnapshot.getKey(), requestOrder);
+
+        }
     }
 
     private void showNotification(String key, RequestOrder requestOrder) {
         Intent intent = new Intent(getApplicationContext(), OrderStatusActivity.class);
         intent.putExtra("userPhone", requestOrder.getPhone());
-        PendingIntent contentIntent = PendingIntent.getActivity(getApplicationContext(), 0, intent,PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent contentIntent = PendingIntent.getActivity(getApplicationContext(), 0, intent,0);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext());
         builder.setAutoCancel(true)
                 .setDefaults(Notification.DEFAULT_ALL)
@@ -70,7 +75,8 @@ public class ListenOrder extends Service implements ChildEventListener {
                 .setSmallIcon(R.mipmap.ic_launcher);
 
         NotificationManager notificationManager = (NotificationManager) getBaseContext().getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.notify(1, builder.build());
+        int random = new Random().nextInt(999-1)+1;
+        notificationManager.notify(random, builder.build());
     }
 
     @Override
