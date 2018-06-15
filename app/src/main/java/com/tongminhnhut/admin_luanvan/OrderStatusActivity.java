@@ -20,6 +20,7 @@ import com.tongminhnhut.admin_luanvan.DAL.LoadMenuHomeDAL;
 import com.tongminhnhut.admin_luanvan.DAL.LoadOrderStatusDAL;
 import com.tongminhnhut.admin_luanvan.DAL.SignInDAL;
 import com.tongminhnhut.admin_luanvan.Model.RequestOrder;
+import com.tongminhnhut.admin_luanvan.Server.ListenOrder;
 
 public class OrderStatusActivity extends AppCompatActivity {
     RecyclerView recyclerView;
@@ -40,6 +41,9 @@ public class OrderStatusActivity extends AppCompatActivity {
         swipeRefreshLayout= findViewById(R.id.swipeLayout_OrderStatus);
 
         addEvent();
+
+        Intent intent = new Intent(getApplicationContext(), ListenOrder.class);
+        startService(intent);
     }
 
     private void addEvent() {

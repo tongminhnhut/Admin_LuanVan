@@ -19,6 +19,8 @@ android {
 }
 
 dependencies {
+    implementation 'io.paperdb:paperdb:2.6'
+
     implementation 'com.squareup.retrofit2:retrofit:2.4.0'
     implementation 'com.squareup.retrofit2:converter-scalars:2.3.0'
 

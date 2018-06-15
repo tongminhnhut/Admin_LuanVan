@@ -9,6 +9,8 @@ import com.tongminhnhut.admin_luanvan.Remote.IGeoCoordinates;
 import com.tongminhnhut.admin_luanvan.Remote.RetrofitClient;
 
 public class Common {
+    public static final String USER_KEY="User";
+    public static final String PWD_KEY ="Password";
     public static final String Update = "Cập nhật thông tin";
     public static final String Delete = "Xoá sản phẩm";
     public static final String Update_Request = "Cập nhật trạng thái";

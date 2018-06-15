@@ -7,21 +7,27 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.rey.material.widget.CheckBox;
 import com.tongminhnhut.admin_luanvan.BLL.CheckConnection;
+import com.tongminhnhut.admin_luanvan.BLL.Common;
 import com.tongminhnhut.admin_luanvan.DAL.SignInDAL;
 
 import dmax.dialog.SpotsDialog;
 import info.hoang8f.widget.FButton;
+import io.paperdb.Paper;
 
 public class SignInActivity extends AppCompatActivity {
     EditText edtPhone, edtPass ;
     FButton btnSignIn;
+    CheckBox cb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
 
+
+        Paper.init(this);
         initView();
         addEvents();
     }
@@ -34,6 +40,10 @@ public class SignInActivity extends AppCompatActivity {
                 String pass = edtPass.getText().toString();
                 final SpotsDialog dialog = new SpotsDialog(SignInActivity.this, "Loading . . .");
                 if (CheckConnection.isConnectedInternet(getApplicationContext())){
+                    if (cb.isChecked()){
+                        Paper.book().write(Common.USER_KEY,edtPhone.getText().toString());
+                        Paper.book().write(Common.PWD_KEY, edtPass.getText().toString());
+                    }
                     Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
                     SignInDAL.signIn(getApplicationContext(),phone, pass, dialog, intent);
                 } else {
@@ -44,6 +54,7 @@ public class SignInActivity extends AppCompatActivity {
     }
 
     private void initView() {
+        cb = findViewById(R.id.cbRemember);
         edtPhone = findViewById(R.id.edtPhonenumber_SignIp);
         edtPass = findViewById(R.id.edtPass_SignIp);
         btnSignIn = findViewById(R.id.btnSignIn_SignIn);
