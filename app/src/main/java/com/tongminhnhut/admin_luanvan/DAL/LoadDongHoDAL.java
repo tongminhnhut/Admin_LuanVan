@@ -20,10 +20,9 @@ import com.tongminhnhut.admin_luanvan.R;
 import com.tongminhnhut.admin_luanvan.ViewHolder.DongHoViewholder;
 
 public class LoadDongHoDAL {
-    public static DatabaseReference db_DongHo ;
+    public static DatabaseReference db_DongHo =FirebaseDatabase.getInstance().getReference("DongHo");
     public static FirebaseRecyclerAdapter<DongHo, DongHoViewholder> adapter;
     public static void loadDongHo (final String ID, final Context context, final RecyclerView recyclerView, final SwipeRefreshLayout swipeRefreshLayout){
-        db_DongHo = FirebaseDatabase.getInstance().getReference("DongHo");
         Query query = db_DongHo.orderByChild("menuId").equalTo(ID) ;
         FirebaseRecyclerOptions<DongHo> options = new FirebaseRecyclerOptions.Builder<DongHo>()
                 .setQuery(query, DongHo.class)

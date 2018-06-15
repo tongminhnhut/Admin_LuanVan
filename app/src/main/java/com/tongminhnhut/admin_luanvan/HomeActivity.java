@@ -24,9 +24,15 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.tongminhnhut.admin_luanvan.BLL.CheckConnection;
 import com.tongminhnhut.admin_luanvan.BLL.Common;
 import com.tongminhnhut.admin_luanvan.DAL.CategoryDAL;
+import com.tongminhnhut.admin_luanvan.DAL.LoadDongHoDAL;
 import com.tongminhnhut.admin_luanvan.DAL.LoadMenuHomeDAL;
 import com.tongminhnhut.admin_luanvan.DAL.SignInDAL;
 import com.tongminhnhut.admin_luanvan.Model.Category;
@@ -104,6 +110,20 @@ public class HomeActivity extends AppCompatActivity
             showUpDateDialog(LoadMenuHomeDAL.adapter.getRef(item.getOrder()).getKey(), LoadMenuHomeDAL.adapter.getItem(item.getOrder()));
 
         }else if (item.getTitle().equals(Common.Delete)){
+            Query query = LoadDongHoDAL.db_DongHo.orderByChild("menuId").equalTo(LoadMenuHomeDAL.adapter.getRef(item.getOrder()).getKey());
+            query.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    for (DataSnapshot postDataSnapshot:dataSnapshot.getChildren()){
+                        postDataSnapshot.getRef().removeValue();
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
             db_Category.child(LoadMenuHomeDAL.adapter.getRef(item.getOrder()).getKey()).removeValue();
             Snackbar.make(drawer,"Danh mục "+CategoryDAL.category.getName()+ " đã xoá ", Snackbar.LENGTH_LONG ).show();
 
