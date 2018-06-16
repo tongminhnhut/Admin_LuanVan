@@ -54,8 +54,10 @@ public class OrderStatusActivity extends AppCompatActivity {
             @Override
             public void onRefresh() {
                 if (CheckConnection.isConnectedInternet(OrderStatusActivity.this)){
-                    Intent intent = new Intent(getApplicationContext(), TrackingOrderActivity.class);
-                    LoadOrderStatusDAL.loadOrderStatus(getApplicationContext(), intent, recyclerView, swipeRefreshLayout);
+                    Intent tracking = new Intent(getApplicationContext(), TrackingOrderActivity.class);
+                    Intent orderDetail = new Intent(getApplicationContext(), OrderDetailActivity.class);
+
+                    LoadOrderStatusDAL.loadOrderStatus(getApplicationContext(), tracking, orderDetail, recyclerView, swipeRefreshLayout);
                 }else {
                     Toast.makeText(OrderStatusActivity.this, "Vui lòng kiểm tra internet", Toast.LENGTH_SHORT).show();
                     return;
@@ -67,8 +69,9 @@ public class OrderStatusActivity extends AppCompatActivity {
             @Override
             public void run() {
                 if (CheckConnection.isConnectedInternet(OrderStatusActivity.this)){
-                    Intent intent = new Intent(getApplicationContext(), TrackingOrderActivity.class);
-                    LoadOrderStatusDAL.loadOrderStatus(getApplicationContext(), intent,recyclerView, swipeRefreshLayout);
+                    Intent tracking = new Intent(getApplicationContext(), TrackingOrderActivity.class);
+                    Intent orderDetail = new Intent(getApplicationContext(), OrderDetailActivity.class);
+                    LoadOrderStatusDAL.loadOrderStatus(getApplicationContext(), tracking,orderDetail,recyclerView, swipeRefreshLayout);
                 }else {
                     Toast.makeText(OrderStatusActivity.this, "Vui lòng kiểm tra internet", Toast.LENGTH_SHORT).show();
                     return;

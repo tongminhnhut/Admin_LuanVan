@@ -26,7 +26,7 @@ public class LoadOrderStatusDAL extends OrderStatusActivity {
     public static RequestOrder currentRequest ;
     public static DatabaseReference db_Request = FirebaseDatabase.getInstance().getReference("RequestOrder");
     public static FirebaseRecyclerAdapter<RequestOrder, OrderViewHolder> adapter;
-    public static void loadOrderStatus ( final Context context,final Intent intent,final RecyclerView recyclerView, final SwipeRefreshLayout swipeRefreshLayout){
+    public static void loadOrderStatus ( final Context context,final Intent tracking, final Intent orderDetail,final RecyclerView recyclerView, final SwipeRefreshLayout swipeRefreshLayout){
         FirebaseRecyclerOptions<RequestOrder> options = new FirebaseRecyclerOptions.Builder<RequestOrder>()
                 .setQuery(db_Request, RequestOrder.class)
                 .build();
@@ -38,12 +38,21 @@ public class LoadOrderStatusDAL extends OrderStatusActivity {
                 holder.txtAddress.setText(model.getAddress());
                 holder.txtPhone.setText(model.getPhone());
                 holder.txtStatus.setText(ConvertToStatus.convertCodeStatus(model.getStatus()));
+                holder.btnDirection.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        tracking.addFlags(tracking.FLAG_ACTIVITY_NEW_TASK);
+                        currentRequest = model;
+                        context.startActivity(tracking);
+                    }
+                });
                 holder.setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onClick(View view, int position, boolean isLongClick) {
-                        intent.addFlags(intent.FLAG_ACTIVITY_NEW_TASK);
+                        orderDetail.addFlags(orderDetail.FLAG_ACTIVITY_NEW_TASK);
                         currentRequest = model;
-                        context.startActivity(intent);
+                        orderDetail.putExtra("orderdetail", adapter.getRef(position).getKey());
+                        context.startActivity(orderDetail);
                     }
                 });
             }

@@ -10,6 +10,8 @@ import com.tongminhnhut.admin_luanvan.BLL.Common;
 import com.tongminhnhut.admin_luanvan.BLL.ItemClickListener;
 import com.tongminhnhut.admin_luanvan.R;
 
+import info.hoang8f.widget.FButton;
+
 public class OrderViewHolder extends RecyclerView.ViewHolder implements
         View.OnClickListener,
         View.OnCreateContextMenuListener
@@ -17,6 +19,7 @@ public class OrderViewHolder extends RecyclerView.ViewHolder implements
 
     public TextView txtId, txtPhone, txtStatus, txtName, txtAddress ;
     private ItemClickListener itemClickListener;
+    public FButton btnDirection;
 
 
     public OrderViewHolder(View itemView) {
@@ -26,6 +29,7 @@ public class OrderViewHolder extends RecyclerView.ViewHolder implements
         txtStatus = itemView.findViewById(R.id.txtStatus_orderStatus);
         txtName = itemView.findViewById(R.id.txtName_orderStatus);
         txtAddress = itemView.findViewById(R.id.txtAddress_orderStatus);
+        btnDirection = itemView.findViewById(R.id.btnDirection_itemOrderStatus);
 
         itemView.setOnClickListener(this);
         itemView.setOnCreateContextMenuListener(this);
