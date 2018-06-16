@@ -5,8 +5,11 @@ import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 
+import com.tongminhnhut.admin_luanvan.Model.RequestOrder;
+import com.tongminhnhut.admin_luanvan.Remote.APIService;
 import com.tongminhnhut.admin_luanvan.Remote.IGeoCoordinates;
 import com.tongminhnhut.admin_luanvan.Remote.RetrofitClient;
+import com.tongminhnhut.admin_luanvan.Remote.Retrofit_Direction;
 
 public class Common {
     public static final String USER_KEY="User";
@@ -17,9 +20,15 @@ public class Common {
     public static final String Delete_request = "Xoá đơn hàng";
 
 
-    public static final String baseUrl = "https://maps.google.com";
+    public static final String baseUrl = "https://maps.googleapis.com/";
+    public static final String BASE_URL = "https://fcm.googleapis.com/";
+
     public static IGeoCoordinates getGeoCodeService(){
-        return RetrofitClient.getClient(baseUrl).create(IGeoCoordinates.class);
+        return Retrofit_Direction.getClient(baseUrl).create(IGeoCoordinates.class);
+    }
+
+    public static APIService getFCMClient(){
+        return RetrofitClient.getClient(BASE_URL).create(APIService.class);
     }
 
     public static Bitmap scaleBitmap (Bitmap bitmap, int newWith, int newHeight){

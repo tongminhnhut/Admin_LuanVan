@@ -56,12 +56,19 @@
             android:name=".TrackingOrderActivity"
             android:label="@string/title_activity_tracking_order" />
 
-        <service
-            android:name=".Server.ListenOrder"
-            android:enabled="true"
-            android:exported="true" />
-
         <activity android:name=".OrderDetailActivity"></activity>
+
+        <service android:name=".Server.MyFirebaseIdService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"></action>
+            </intent-filter>
+        </service>
+
+        <service android:name=".Server.MyFirebaseMessaging">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"></action>
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

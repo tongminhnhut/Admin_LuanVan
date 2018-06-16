@@ -8,19 +8,31 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.jaredrummler.materialspinner.MaterialSpinner;
 import com.tongminhnhut.admin_luanvan.BLL.CheckConnection;
 import com.tongminhnhut.admin_luanvan.BLL.Common;
-import com.tongminhnhut.admin_luanvan.DAL.LoadMenuHomeDAL;
 import com.tongminhnhut.admin_luanvan.DAL.LoadOrderStatusDAL;
-import com.tongminhnhut.admin_luanvan.DAL.SignInDAL;
+import com.tongminhnhut.admin_luanvan.Model.MyResponse;
+import com.tongminhnhut.admin_luanvan.Model.Notification;
 import com.tongminhnhut.admin_luanvan.Model.RequestOrder;
-import com.tongminhnhut.admin_luanvan.Server.ListenOrder;
+import com.tongminhnhut.admin_luanvan.Model.Sender;
+import com.tongminhnhut.admin_luanvan.Model.Token;
+import com.tongminhnhut.admin_luanvan.Remote.APIService;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class OrderStatusActivity extends AppCompatActivity {
     RecyclerView recyclerView;
@@ -28,10 +40,14 @@ public class OrderStatusActivity extends AppCompatActivity {
     SwipeRefreshLayout swipeRefreshLayout;
     MaterialSpinner spinner ;
 
+    APIService mService ;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_status);
+
+        mService = Common.getFCMClient();
 
         recyclerView = findViewById(R.id.recyclerView_OrderStatus);
         recyclerView.setHasFixedSize(true);
@@ -113,6 +129,8 @@ public class OrderStatusActivity extends AppCompatActivity {
                 dialog.dismiss();
                 item.setStatus(String.valueOf(spinner.getSelectedIndex()));
                 LoadOrderStatusDAL.db_Request.child(key).setValue(item);
+
+                sendOrderStatusToUser(key,item);
             }
         });
 
@@ -127,5 +145,41 @@ public class OrderStatusActivity extends AppCompatActivity {
 
 
 
+    }
+
+    private void sendOrderStatusToUser(final String key, final RequestOrder item) {
+        DatabaseReference tokens = FirebaseDatabase.getInstance().getReference("Tokens");
+        tokens.orderByKey().equalTo(item.getPhone())
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot postSnapShot:dataSnapshot.getChildren()){
+                            Token token = postSnapShot.getValue(Token.class);
+
+                            Notification notification = new Notification("Watch Store", "don hang "+key+" da cap nhat");
+                            Sender content = new Sender(token.getToken(), notification);
+                            mService.sendNotification(content)
+                                    .enqueue(new Callback<MyResponse>() {
+                                        @Override
+                                        public void onResponse(Call<MyResponse> call, Response<MyResponse> response) {
+                                            if (response.body().success==1){
+                                                Toast.makeText(OrderStatusActivity.this, "Order was update", Toast.LENGTH_SHORT).show();
+                                            }else
+                                                Toast.makeText(OrderStatusActivity.this, "Order was update but not send notification", Toast.LENGTH_SHORT).show();
+                                        }
+
+                                        @Override
+                                        public void onFailure(Call<MyResponse> call, Throwable t) {
+                                            Log.e("ERROR",t.getMessage());
+                                        }
+                                    });
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
     }
 }
