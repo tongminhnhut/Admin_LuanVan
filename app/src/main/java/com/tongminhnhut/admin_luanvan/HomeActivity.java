@@ -352,6 +352,7 @@ public class HomeActivity extends AppCompatActivity
         } else if (id == R.id.nav_Logout) {
 
         }else if (id == R.id.nav_banner) {
+            startActivity(new Intent(getApplicationContext(), BannerrActivity.class));
 
         }
 

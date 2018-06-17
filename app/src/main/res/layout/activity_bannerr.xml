@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bgapp"
+    android:id="@+id/swipeLayout_Banner"
+    tools:context=".BannerrActivity">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView_Banner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</android.support.v4.widget.SwipeRefreshLayout>
