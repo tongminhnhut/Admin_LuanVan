@@ -19,7 +19,7 @@ public class OrderViewHolder extends RecyclerView.ViewHolder implements
 
     public TextView txtId, txtPhone, txtStatus, txtName, txtAddress ;
     private ItemClickListener itemClickListener;
-    public FButton btnDirection;
+    public FButton btnDirection, btnUpdate, btnxoa;
 
 
     public OrderViewHolder(View itemView) {
@@ -30,6 +30,8 @@ public class OrderViewHolder extends RecyclerView.ViewHolder implements
         txtName = itemView.findViewById(R.id.txtName_orderStatus);
         txtAddress = itemView.findViewById(R.id.txtAddress_orderStatus);
         btnDirection = itemView.findViewById(R.id.btnDirection_itemOrderStatus);
+        btnUpdate = itemView.findViewById(R.id.btnUpdate_itemOrderStatus);
+        btnxoa = itemView.findViewById(R.id.btnDelete_itemOrderStatus);
 
         itemView.setOnClickListener(this);
         itemView.setOnCreateContextMenuListener(this);

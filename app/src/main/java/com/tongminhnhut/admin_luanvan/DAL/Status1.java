@@ -19,7 +19,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.tongminhnhut.admin_luanvan.BLL.Common;
 import com.tongminhnhut.admin_luanvan.BLL.ConvertToStatus;
 import com.tongminhnhut.admin_luanvan.BLL.ItemClickListener;
 import com.tongminhnhut.admin_luanvan.Model.MyResponse;
@@ -27,7 +26,8 @@ import com.tongminhnhut.admin_luanvan.Model.Notification;
 import com.tongminhnhut.admin_luanvan.Model.RequestOrder;
 import com.tongminhnhut.admin_luanvan.Model.Sender;
 import com.tongminhnhut.admin_luanvan.Model.Token;
-import com.tongminhnhut.admin_luanvan.OrderStatusActivity;
+import com.tongminhnhut.admin_luanvan.Model_ViewHolder.Status1_model;
+import com.tongminhnhut.admin_luanvan.Model_ViewHolder.Status2_model;
 import com.tongminhnhut.admin_luanvan.R;
 import com.tongminhnhut.admin_luanvan.Remote.APIService;
 import com.tongminhnhut.admin_luanvan.ViewHolder.OrderViewHolder;
@@ -36,18 +36,18 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class LoadOrderStatusDAL extends OrderStatusActivity {
-//    public static RequestOrder currentRequest ;
+public class Status1 {
+    public static Status1_model currentRequest ;
     public static DatabaseReference db_Request = FirebaseDatabase.getInstance().getReference("RequestOrder");
-    public static FirebaseRecyclerAdapter<RequestOrder, OrderViewHolder> adapter;
-    public static void loadOrderStatus (final APIService mService, final Context context, final Intent tracking, final Intent orderDetail, final RecyclerView recyclerView, final SwipeRefreshLayout swipeRefreshLayout){
-        Query query = db_Request.orderByChild("status").equalTo("0");
-        FirebaseRecyclerOptions<RequestOrder> options = new FirebaseRecyclerOptions.Builder<RequestOrder>()
-                .setQuery(query, RequestOrder.class)
+    public static FirebaseRecyclerAdapter<Status1_model, OrderViewHolder> adapter;
+    public static void loadOrder_CB(final APIService mService,final Context context, final Intent tracking, final Intent orderDetail, final RecyclerView recyclerView, final SwipeRefreshLayout swipeRefreshLayout){
+        Query query = db_Request.orderByChild("status").equalTo("1");
+        FirebaseRecyclerOptions<Status1_model> options = new FirebaseRecyclerOptions.Builder<Status1_model>()
+                .setQuery(query, Status1_model.class)
                 .build();
-        adapter = new FirebaseRecyclerAdapter<RequestOrder, OrderViewHolder>(options) {
+        adapter = new FirebaseRecyclerAdapter<Status1_model, OrderViewHolder>(options) {
             @Override
-            protected void onBindViewHolder(@NonNull OrderViewHolder holder, final int position, @NonNull final RequestOrder model) {
+            protected void onBindViewHolder(@NonNull OrderViewHolder holder, final int position, @NonNull final Status1_model model) {
                 holder.txtName.setText(model.getName());
                 holder.txtId.setText(adapter.getRef(position).getKey());
                 holder.txtAddress.setText(model.getAddress());
@@ -57,7 +57,7 @@ public class LoadOrderStatusDAL extends OrderStatusActivity {
                     @Override
                     public void onClick(View v) {
                         tracking.addFlags(tracking.FLAG_ACTIVITY_NEW_TASK);
-                        Common.currentRe = model;
+                        currentRequest = model;
                         context.startActivity(tracking);
                     }
                 });
@@ -65,12 +65,11 @@ public class LoadOrderStatusDAL extends OrderStatusActivity {
                     @Override
                     public void onClick(View view, int position, boolean isLongClick) {
                         orderDetail.addFlags(orderDetail.FLAG_ACTIVITY_NEW_TASK);
-                        Common.currentRe = model;
+                        currentRequest = model;
                         orderDetail.putExtra("orderdetail", adapter.getRef(position).getKey());
                         context.startActivity(orderDetail);
                     }
                 });
-
                 holder.btnUpdate.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -87,6 +86,7 @@ public class LoadOrderStatusDAL extends OrderStatusActivity {
                     @Override
                     public void onClick(View v) {
                         db_Request.child(adapter.getRef(position).getKey()).removeValue();
+                        adapter.notifyDataSetChanged();
                     }
                 });
             }
@@ -105,7 +105,7 @@ public class LoadOrderStatusDAL extends OrderStatusActivity {
         swipeRefreshLayout.setRefreshing(false);
     }
 
-    public static void sendOrderStatusToUser(final String key, final RequestOrder item, final APIService serVice, final Context context) {
+    public static void sendOrderStatusToUser(final String key, final Status1_model item, final APIService serVice, final Context context) {
         DatabaseReference tokens = FirebaseDatabase.getInstance().getReference("Tokens");
         tokens.orderByKey().equalTo(item.getPhone())
                 .addValueEventListener(new ValueEventListener() {
@@ -141,10 +141,5 @@ public class LoadOrderStatusDAL extends OrderStatusActivity {
                 });
     }
 
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        adapter.startListening();
-    }
 }
+

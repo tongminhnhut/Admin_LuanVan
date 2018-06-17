@@ -13,6 +13,7 @@ import com.google.firebase.messaging.RemoteMessage;
 import com.tongminhnhut.admin_luanvan.MainActivity;
 import com.tongminhnhut.admin_luanvan.OrderStatusActivity;
 import com.tongminhnhut.admin_luanvan.R;
+import com.tongminhnhut.admin_luanvan.StatusActivity;
 
 public class MyFirebaseMessaging extends FirebaseMessagingService {
 
@@ -24,7 +25,7 @@ public class MyFirebaseMessaging extends FirebaseMessagingService {
     }
     private void sendNotification(RemoteMessage remoteMessage) {
         RemoteMessage.Notification notification = remoteMessage.getNotification();
-        Intent intent = new Intent(this, OrderStatusActivity.class);
+        Intent intent = new Intent(this, StatusActivity.class);
         intent.addFlags(intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
 

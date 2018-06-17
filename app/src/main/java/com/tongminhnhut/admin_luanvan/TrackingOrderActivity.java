@@ -111,7 +111,7 @@ public class TrackingOrderActivity extends FragmentActivity implements OnMapRead
                 mMap.animateCamera(CameraUpdateFactory.zoomTo(17.0f));
 
                 //addmarker your order
-                drawRoute(yourLocation, LoadOrderStatusDAL.currentRequest.getAddress());
+                drawRoute(yourLocation, Common.currentRe.getAddress());
 
             }else {
 //                Toast.makeText(this, "Couldn't get the location ", Toast.LENGTH_SHORT).show();
@@ -140,7 +140,7 @@ public class TrackingOrderActivity extends FragmentActivity implements OnMapRead
                     Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.box);
                     bitmap = Common.scaleBitmap(bitmap, 70, 70);
                     MarkerOptions maker = new MarkerOptions().icon(BitmapDescriptorFactory.fromBitmap(bitmap))
-                            .title("Đơn hàng của "+ LoadOrderStatusDAL.currentRequest.getName())
+                            .title("Đơn hàng của "+ Common.currentRe.getName())
                             .position(orderLocation);
                     mMap.addMarker(maker);
 

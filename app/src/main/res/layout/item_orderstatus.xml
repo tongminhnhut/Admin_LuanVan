@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
+    android:layout_margin="5dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <LinearLayout
         android:weightSum="5"
@@ -53,16 +53,45 @@
                 android:layout_height="wrap_content" />
 
         </LinearLayout>
-        <info.hoang8f.widget.FButton
-            android:layout_marginTop="10dp"
-            app:cornerRadius="4dp"
-            android:id="@+id/btnDirection_itemOrderStatus"
-            app:shadowEnabled="true"
-            app:shadowHeight="5dp"
-            android:text="Chỉ đường"
-            app:fButtonColor="@android:color/transparent"
+        <LinearLayout
+            android:weightSum="3"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content">
+            <info.hoang8f.widget.FButton
+                android:layout_weight="1"
+                android:layout_marginTop="10dp"
+                app:cornerRadius="4dp"
+                android:id="@+id/btnUpdate_itemOrderStatus"
+                app:shadowEnabled="true"
+                app:shadowHeight="5dp"
+                android:text="Cập nhật"
+                app:fButtonColor="@android:color/transparent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <info.hoang8f.widget.FButton
+                android:layout_weight="1"
+                android:layout_marginTop="10dp"
+                app:cornerRadius="4dp"
+                android:id="@+id/btnDirection_itemOrderStatus"
+                app:shadowEnabled="true"
+                app:shadowHeight="5dp"
+                android:text="Chỉ đường"
+                app:fButtonColor="@android:color/transparent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <info.hoang8f.widget.FButton
+                android:layout_weight="1"
+                android:layout_marginTop="10dp"
+                app:cornerRadius="4dp"
+                android:id="@+id/btnDelete_itemOrderStatus"
+                app:shadowEnabled="true"
+                app:shadowHeight="5dp"
+                android:text="Xoa"
+                app:fButtonColor="@android:color/transparent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
 
 
 

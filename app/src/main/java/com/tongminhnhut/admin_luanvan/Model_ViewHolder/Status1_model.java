@@ -1,10 +1,10 @@
-package com.tongminhnhut.admin_luanvan.Model;
+package com.tongminhnhut.admin_luanvan.Model_ViewHolder;
 
-import android.support.v7.widget.RecyclerView;
+import com.tongminhnhut.admin_luanvan.Model.Order;
 
 import java.util.List;
 
-public class RequestOrder  {
+public class Status1_model {
     private String Phone ;
     private String Name;
     private String Address;
@@ -12,10 +12,10 @@ public class RequestOrder  {
     private String Status;
     private List<Order> OrderList;
 
-    public RequestOrder() {
+    public Status1_model() {
     }
 
-    public RequestOrder(String phone, String name, String address, String total, List<Order> orderList) {
+    public Status1_model(String phone, String name, String address, String total, List<Order> orderList) {
         Phone = phone;
         Name = name;
         Address = address;
