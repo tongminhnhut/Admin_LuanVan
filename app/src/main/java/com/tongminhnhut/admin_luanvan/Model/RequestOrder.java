@@ -10,6 +10,7 @@ public class RequestOrder  {
     private String Address;
     private String Total;
     private String Status;
+    private String Comment;
     private List<Order> OrderList;
 
     public RequestOrder() {
@@ -22,6 +23,24 @@ public class RequestOrder  {
         Total = total;
         OrderList = orderList;
         Status ="0";
+    }
+
+    public RequestOrder(String phone, String name, String address, String total, String comment, List<Order> orderList) {
+        Phone = phone;
+        Name = name;
+        Address = address;
+        Total = total;
+        Status = "0";
+        Comment = comment;
+        OrderList = orderList;
+    }
+
+    public String getComment() {
+        return Comment;
+    }
+
+    public void setComment(String comment) {
+        Comment = comment;
     }
 
     public String getPhone() {
