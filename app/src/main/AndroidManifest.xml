@@ -25,7 +25,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity android:name=".SignInActivity" />
         <activity android:name=".SignUpActivity" />
@@ -72,9 +71,8 @@
         <activity android:name=".BannerrActivity" />
         <activity
             android:name=".StatusActivity"
-            android:label="@string/title_activity_status">
-
-        </activity>
+            android:label="@string/title_activity_status"></activity>
+        <activity android:name=".AccountActivity"></activity>
     </application>
 
 </manifest>

@@ -1,5 +1,6 @@
 package com.tongminhnhut.admin_luanvan;
 
+import android.accounts.Account;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -43,6 +44,7 @@ import com.tongminhnhut.admin_luanvan.Model.Token;
 
 
 import info.hoang8f.widget.FButton;
+import io.paperdb.Paper;
 
 import static com.tongminhnhut.admin_luanvan.DAL.CategoryDAL.db_Category;
 
@@ -72,6 +74,7 @@ public class HomeActivity extends AppCompatActivity
         toolbar.setTitle("Administrator");
         setSupportActionBar(toolbar);
 
+        Paper.init(this);
        
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -347,9 +350,14 @@ public class HomeActivity extends AppCompatActivity
 
         if (id == R.id.nav_order) {
             startActivity(new Intent(getApplicationContext(), StatusActivity.class));
-        } else if (id == R.id.nav_Quanly) {
-
+        } else if (id == R.id.nav_QuanlyAccount) {
+            startActivity(new Intent(getApplicationContext(), AccountActivity.class));
         } else if (id == R.id.nav_Logout) {
+            Paper.book().destroy();
+            Intent logoutItent = new Intent(getApplicationContext(), SignInActivity.class);
+            logoutItent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(logoutItent);
+            finish();
 
         }else if (id == R.id.nav_banner) {
             startActivity(new Intent(getApplicationContext(), BannerrActivity.class));

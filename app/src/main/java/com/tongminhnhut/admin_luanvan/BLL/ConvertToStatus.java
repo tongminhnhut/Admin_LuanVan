@@ -8,4 +8,11 @@ public class ConvertToStatus {
         else
             return "Đơn hàng đang được giao đến khách hàng" ;
     }
+
+    public static String convertToAccount (Boolean code){
+        if (code.booleanValue()){
+            return "Quyền quản lý";
+        } else
+            return "Tài khoản người dùng";
+    }
 }

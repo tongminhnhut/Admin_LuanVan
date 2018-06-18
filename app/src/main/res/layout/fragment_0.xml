@@ -3,6 +3,7 @@
     android:id="@+id/swipeLayout_Fragment0"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:background="@drawable/bgapp"
     android:layout_height="match_parent">
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recylerView_Fragment0"
