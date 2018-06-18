@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardElevation="8dp"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_margin="20dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:textColorHint="@color/colorPrimary"
+            android:paddingLeft="10dp"
+            android:id="@+id/edtId_dialogAdd_Banner"
+            android:hint="ID"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:met_baseColor="@color/colorPrimary"
+            app:met_floatingLabel="highlight"
+            app:met_primaryColor="@color/colorPrimary"
+            app:met_singleLineEllipsis="true"/>
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:textColorHint="@color/colorPrimary"
+            android:paddingLeft="10dp"
+            android:id="@+id/edtName_dialogAdd_Banner"
+            android:hint="Name of banner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:met_baseColor="@color/colorPrimary"
+            app:met_floatingLabel="highlight"
+            app:met_primaryColor="@color/colorPrimary"
+            app:met_singleLineEllipsis="true"/>
+        <LinearLayout
+            android:weightSum="2"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <info.hoang8f.widget.FButton
+                android:textColor="@android:color/white"
+
+                android:layout_weight="1"
+                app:cornerRadius="4dp"
+                android:id="@+id/btnSlect_dialogAdd_Banner"
+                app:shadowEnabled="true"
+                android:layout_margin="4dp"
+                app:shadowHeight="5dp"
+                android:text="Select"
+                app:fButtonColor="@color/colorPrimary"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+            <info.hoang8f.widget.FButton
+                android:textColor="@android:color/white"
+                android:layout_weight="1"
+                app:cornerRadius="4dp"
+                android:id="@+id/btnUpload_dialogAdd_Banner"
+                app:shadowEnabled="true"
+                android:layout_margin="4dp"
+                app:shadowHeight="5dp"
+                android:text="Upload"
+                app:fButtonColor="@color/colorPrimaryDark"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>
