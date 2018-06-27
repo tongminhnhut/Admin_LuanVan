@@ -15,6 +15,8 @@ import com.tongminhnhut.admin_luanvan.OrderStatusActivity;
 import com.tongminhnhut.admin_luanvan.R;
 import com.tongminhnhut.admin_luanvan.StatusActivity;
 
+import java.util.Random;
+
 public class MyFirebaseMessaging extends FirebaseMessagingService {
 
     @Override
@@ -38,6 +40,7 @@ public class MyFirebaseMessaging extends FirebaseMessagingService {
                 .setSound(defaultSoundUri)
                 .setContentIntent(pendingIntent);
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.notify(0,builder.build());
+        int randomId = new Random().nextInt(9999-1)+1;
+        notificationManager.notify(randomId,builder.build());
     }
 }
