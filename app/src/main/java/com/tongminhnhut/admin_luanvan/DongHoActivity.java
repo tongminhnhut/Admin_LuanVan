@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
@@ -73,10 +74,10 @@ public class DongHoActivity extends AppCompatActivity {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                showDialogAddNew();
-                Intent intent = new Intent(getApplicationContext(), AddDongHoActivity.class);
-                intent.putExtra("ID", menuId);
-                startActivity(intent);
+                showDialogAddNew();
+//                Intent intent = new Intent(getApplicationContext(), AddDongHoActivity.class);
+//                intent.putExtra("ID", menuId);
+//                startActivity(intent);
             }
         });
         swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary,
@@ -153,18 +154,18 @@ public class DongHoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ProgressDialog progressDialog = new ProgressDialog(DongHoActivity.this);
-//                DongHoDAL.upLoadImage(menuId, saveUri,getApplicationContext(),
-//                        edtName,
-//                        edtPrice,
-//                        edtBrand,
-//                        edtXuatxu,
-////                        edtDis,
-////                        edtBaohanh,
-//                        edtKichthuoc,
-////                        edtDaydeo,
-////                        edtMay,
-//                        progressDialog
-//                        );
+                DongHoDAL.upLoadImage(menuId, saveUri,getApplicationContext(),
+                        edtName,
+                        edtPrice,
+                        edtBrand,
+                        edtXuatxu,
+                        edtDis,
+                        edtBaohanh,
+                        edtKichthuoc,
+                        edtDaydeo,
+                        edtMay,
+                        progressDialog
+                        );
 //                DongHoDAL.addNew(relativeLayout);
             }
         });
@@ -180,7 +181,7 @@ public class DongHoActivity extends AppCompatActivity {
         alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-//                DongHoDAL.addNew(relativeLayout);
+                DongHoDAL.addNew(relativeLayout);
             }
         });
         alertDialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
@@ -226,11 +227,92 @@ public class DongHoActivity extends AppCompatActivity {
             DongHoDAL.db_DongHo.child(LoadDongHoDAL.adapter.getRef(item.getOrder()).getKey()).removeValue();
 
         } else if (item.getTitle().equals(Common.Update)){
-            Intent intent = new Intent(getApplicationContext(), UpdatDongHoActivity.class);
-            intent.putExtra("key",LoadDongHoDAL.adapter.getRef(item.getOrder()).getKey());
-            intent.putExtra("dongho", LoadDongHoDAL.adapter.getItem(item.getOrder()) );
-            startActivity(intent);
+            showDialoUpdate(LoadDongHoDAL.adapter.getRef(item.getOrder()).getKey(), LoadDongHoDAL.adapter.getItem(item.getOrder()));
+//            Intent intent = new Intent(getApplicationContext(), UpdatDongHoActivity.class);
+//            intent.putExtra("key",LoadDongHoDAL.adapter.getRef(item.getOrder()).getKey());
+//            intent.putExtra("dongho", LoadDongHoDAL.adapter.getItem(item.getOrder()) );
+//            startActivity(intent);
         }
         return super.onContextItemSelected(item);
+    }
+
+    private void showDialoUpdate(final String key, final DongHo item) {
+        alertDialog = new AlertDialog.Builder(this);
+        alertDialog.setTitle("Thêm sản phẩm mới");
+        alertDialog.setMessage("Điền thông tin sản phẩm");
+        alertDialog.setIcon(R.drawable.ic_library_add_black_24dp);
+
+        LayoutInflater inflater = this.getLayoutInflater();
+        View view = inflater.inflate(R.layout.dialog_add_dongho, null);
+
+        alertDialog.setView(view);
+
+        btnYes = view.findViewById(R.id.btnYes_dialogAddDH);
+        btnSelect = view.findViewById(R.id.btnSlect_dialogAddDH);
+        btnUpload = view.findViewById(R.id.btnUpload_dialogAddDH);
+        edtName = view.findViewById(R.id.edtName_dialogAddDH);
+        edtBaohanh = view.findViewById(R.id.edtBaoHanh_dialogAddDH);
+        edtBrand = view.findViewById(R.id.edtBrand_dialogAddDH);
+        edtDaydeo = view.findViewById(R.id.edtDaydeo_dialogAddDH);
+        edtKichthuoc = view.findViewById(R.id.edtSize_dialogAddDH);
+        edtPrice = view.findViewById(R.id.edtPrice_dialogAddDH);
+        edtXuatxu = view.findViewById(R.id.edtXuatxu_dialogAddDH);
+        edtMay = view.findViewById(R.id.edtMay_dialogAddDH);
+        edtDis = view.findViewById(R.id.edtDiscount_dialogAddDH);
+
+        edtDis.setText(item.getDiscount());
+        edtMay.setText(item.getMay());
+        edtXuatxu.setText(item.getXuatXu());
+        edtPrice.setText(item.getGia());
+        edtKichthuoc.setText(item.getSize());
+        edtDaydeo.setText(item.getDayDeo());
+        edtBrand.setText(item.getThuongHieu());
+        edtName.setText(item.getName());
+        edtBaohanh.setText(item.getBaoHanh());
+
+        btnUpload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ProgressDialog progressDialog = new ProgressDialog(DongHoActivity.this);
+                DongHoDAL.changeImage(item,saveUri,getApplicationContext(), progressDialog);
+            }
+        });
+
+        btnSelect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showImage();
+            }
+        });
+
+
+        alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                item.setDiscount(edtDis.getText().toString());
+                item.setMay(edtMay.getText().toString());
+                item.setXuatXu(edtXuatxu.getText().toString());
+                item.setGia(edtPrice.getText().toString());
+                item.setSize(edtKichthuoc.getText().toString());
+                item.setDayDeo(edtDaydeo.getText().toString());
+                item.setThuongHieu(edtBrand.getText().toString());
+                item.setName(edtName.getText().toString());
+                item.setBaoHanh(edtBaohanh.getText().toString());
+                DongHoDAL.db_DongHo.child(key).setValue(item);
+                Snackbar.make(relativeLayout,"Sản phẩm "+item.getName()+ " đã được chỉnh sửa ", Snackbar.LENGTH_LONG ).show();
+
+            }
+        });
+        alertDialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        alertDialog.create();
+        alertDialog.show();
+
     }
 }

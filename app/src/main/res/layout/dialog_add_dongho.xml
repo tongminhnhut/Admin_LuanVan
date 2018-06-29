@@ -3,20 +3,17 @@
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardElevation="8dp"
-    android:layout_height="wrap_content">
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    android:layout_height="match_parent">
         <android.support.v7.widget.CardView
             app:cardElevation="8dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <LinearLayout
-                    android:layout_margin="20dp"
+                    android:layout_margin="10dp"
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -31,95 +28,133 @@
                         app:met_floatingLabel="highlight"
                         app:met_primaryColor="@color/colorPrimary"
                         app:met_singleLineEllipsis="true"/>
-                    <com.rengwuxian.materialedittext.MaterialEditText
-                        android:inputType="number"
-                        android:textColorHint="@color/colorPrimary"
-                        android:paddingLeft="10dp"
-                        android:id="@+id/edtPrice_dialogAddDH"
-                        android:hint="Giá"
+                    <LinearLayout
+                        android:weightSum="2"
+                        android:orientation="horizontal"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:met_baseColor="@color/colorPrimary"
-                        app:met_floatingLabel="highlight"
-                        app:met_primaryColor="@color/colorPrimary"
-                        app:met_singleLineEllipsis="true"/>
-                    <com.rengwuxian.materialedittext.MaterialEditText
-                        android:textColorHint="@color/colorPrimary"
-                        android:paddingLeft="10dp"
-                        android:id="@+id/edtBrand_dialogAddDH"
-                        android:hint="Thương hiệu"
+                        android:layout_height="wrap_content">
+                        <com.rengwuxian.materialedittext.MaterialEditText
+                            android:layout_weight="1"
+                            android:inputType="number"
+                            android:textColorHint="@color/colorPrimary"
+                            android:paddingLeft="10dp"
+                            android:id="@+id/edtPrice_dialogAddDH"
+                            android:hint="Giá"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            app:met_baseColor="@color/colorPrimary"
+                            app:met_floatingLabel="highlight"
+                            app:met_primaryColor="@color/colorPrimary"
+                            app:met_singleLineEllipsis="true"/>
+                        <com.rengwuxian.materialedittext.MaterialEditText
+                            android:layout_weight="1"
+                            android:layout_marginLeft="10dp"
+                            android:textColorHint="@color/colorPrimary"
+                            android:paddingLeft="10dp"
+                            android:id="@+id/edtBrand_dialogAddDH"
+                            android:hint="Thương hiệu"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            app:met_baseColor="@color/colorPrimary"
+                            app:met_floatingLabel="highlight"
+                            app:met_primaryColor="@color/colorPrimary"
+                            app:met_singleLineEllipsis="true"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:weightSum="2"
+                        android:orientation="horizontal"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:met_baseColor="@color/colorPrimary"
-                        app:met_floatingLabel="highlight"
-                        app:met_primaryColor="@color/colorPrimary"
-                        app:met_singleLineEllipsis="true"/>
-                    <com.rengwuxian.materialedittext.MaterialEditText
-                        android:textColorHint="@color/colorPrimary"
-                        android:paddingLeft="10dp"
-                        android:id="@+id/edtXuatxu_dialogAddDH"
-                        android:hint="Xuất xứ"
+                        android:layout_height="wrap_content">
+                        <com.rengwuxian.materialedittext.MaterialEditText
+                            android:layout_weight="1"
+                            android:textColorHint="@color/colorPrimary"
+                            android:paddingLeft="10dp"
+                            android:id="@+id/edtXuatxu_dialogAddDH"
+                            android:hint="Xuất xứ"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            app:met_baseColor="@color/colorPrimary"
+                            app:met_floatingLabel="highlight"
+                            app:met_primaryColor="@color/colorPrimary"
+                            app:met_singleLineEllipsis="true"/>
+                        <com.rengwuxian.materialedittext.MaterialEditText
+                            android:layout_weight="1"
+                            android:layout_marginLeft="10dp"
+                            android:textColorHint="@color/colorPrimary"
+                            android:paddingLeft="10dp"
+                            android:id="@+id/edtMay_dialogAddDH"
+                            android:hint="Nhãn hiệu máy"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            app:met_baseColor="@color/colorPrimary"
+                            app:met_floatingLabel="highlight"
+                            app:met_primaryColor="@color/colorPrimary"
+                            app:met_singleLineEllipsis="true"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:weightSum="2"
+                        android:orientation="horizontal"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:met_baseColor="@color/colorPrimary"
-                        app:met_floatingLabel="highlight"
-                        app:met_primaryColor="@color/colorPrimary"
-                        app:met_singleLineEllipsis="true"/>
-                    <com.rengwuxian.materialedittext.MaterialEditText
-                        android:textColorHint="@color/colorPrimary"
-                        android:paddingLeft="10dp"
-                        android:id="@+id/edtSize_dialogAddDH"
-                        android:hint="Kích thước mặt kính"
+                        android:layout_height="wrap_content">
+                        <com.rengwuxian.materialedittext.MaterialEditText
+                            android:layout_weight="1"
+                            android:textColorHint="@color/colorPrimary"
+                            android:paddingLeft="10dp"
+                            android:id="@+id/edtSize_dialogAddDH"
+                            android:hint="Kích thước mặt kính"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            app:met_baseColor="@color/colorPrimary"
+                            app:met_floatingLabel="highlight"
+                            app:met_primaryColor="@color/colorPrimary"
+                            app:met_singleLineEllipsis="true"/>
+                        <com.rengwuxian.materialedittext.MaterialEditText
+                            android:layout_weight="1"
+                            android:layout_marginLeft="10dp"
+                            android:textColorHint="@color/colorPrimary"
+                            android:paddingLeft="10dp"
+                            android:id="@+id/edtBaoHanh_dialogAddDH"
+                            android:hint="Bảo hành"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            app:met_baseColor="@color/colorPrimary"
+                            app:met_floatingLabel="highlight"
+                            app:met_primaryColor="@color/colorPrimary"
+                            app:met_singleLineEllipsis="true"/>
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:weightSum="2"
+                        android:orientation="horizontal"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:met_baseColor="@color/colorPrimary"
-                        app:met_floatingLabel="highlight"
-                        app:met_primaryColor="@color/colorPrimary"
-                        app:met_singleLineEllipsis="true"/>
-                    <com.rengwuxian.materialedittext.MaterialEditText
-                        android:textColorHint="@color/colorPrimary"
-                        android:paddingLeft="10dp"
-                        android:id="@+id/edtBaoHanh_dialogAddDH"
-                        android:hint="Bảo hành"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:met_baseColor="@color/colorPrimary"
-                        app:met_floatingLabel="highlight"
-                        app:met_primaryColor="@color/colorPrimary"
-                        app:met_singleLineEllipsis="true"/>
-                    <com.rengwuxian.materialedittext.MaterialEditText
-                        android:textColorHint="@color/colorPrimary"
-                        android:paddingLeft="10dp"
-                        android:id="@+id/edtMay_dialogAddDH"
-                        android:hint="Nhãn hiệu máy"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:met_baseColor="@color/colorPrimary"
-                        app:met_floatingLabel="highlight"
-                        app:met_primaryColor="@color/colorPrimary"
-                        app:met_singleLineEllipsis="true"/>
-                    <com.rengwuxian.materialedittext.MaterialEditText
-                        android:textColorHint="@color/colorPrimary"
-                        android:paddingLeft="10dp"
-                        android:id="@+id/edtDaydeo_dialogAddDH"
-                        android:hint="Dây đeo"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:met_baseColor="@color/colorPrimary"
-                        app:met_floatingLabel="highlight"
-                        app:met_primaryColor="@color/colorPrimary"
-                        app:met_singleLineEllipsis="true"/>
-                    <com.rengwuxian.materialedittext.MaterialEditText
-                        android:textColorHint="@color/colorPrimary"
-                        android:paddingLeft="10dp"
-                        android:id="@+id/edtDiscount_dialogAddDH"
-                        android:hint="Giảm giá"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:met_baseColor="@color/colorPrimary"
-                        app:met_floatingLabel="highlight"
-                        app:met_primaryColor="@color/colorPrimary"
-                        app:met_singleLineEllipsis="true"/>
+                        android:layout_height="wrap_content">
+                        <com.rengwuxian.materialedittext.MaterialEditText
+                            android:layout_weight="1"
+                            android:textColorHint="@color/colorPrimary"
+                            android:paddingLeft="10dp"
+                            android:id="@+id/edtDaydeo_dialogAddDH"
+                            android:hint="Dây đeo"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            app:met_baseColor="@color/colorPrimary"
+                            app:met_floatingLabel="highlight"
+                            app:met_primaryColor="@color/colorPrimary"
+                            app:met_singleLineEllipsis="true"/>
+                        <com.rengwuxian.materialedittext.MaterialEditText
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="1"
+                            android:textColorHint="@color/colorPrimary"
+                            android:paddingLeft="10dp"
+                            android:id="@+id/edtDiscount_dialogAddDH"
+                            android:hint="Giảm giá"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            app:met_baseColor="@color/colorPrimary"
+                            app:met_floatingLabel="highlight"
+                            app:met_primaryColor="@color/colorPrimary"
+                            app:met_singleLineEllipsis="true"/>
+
+                    </LinearLayout>
 
                     <LinearLayout
                         android:layout_alignParentBottom="true"
@@ -163,6 +198,5 @@
         </android.support.v7.widget.CardView>
 
 
-    </ScrollView>
 
 </RelativeLayout>

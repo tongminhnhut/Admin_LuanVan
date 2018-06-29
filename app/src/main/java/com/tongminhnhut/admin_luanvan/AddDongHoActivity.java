@@ -83,7 +83,7 @@ public class AddDongHoActivity extends AppCompatActivity {
         btnYes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DongHoDAL.addNew();
+//                DongHoDAL.addNew();
                 finish();
                 Toast.makeText(AddDongHoActivity.this, "Sản phẩm đã được thêm vào", Toast.LENGTH_LONG).show();
             }

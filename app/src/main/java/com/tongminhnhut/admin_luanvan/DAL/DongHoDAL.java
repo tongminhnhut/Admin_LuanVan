@@ -88,10 +88,10 @@ public class DongHoDAL {
         }
     }
 
-    public static void addNew(){
+    public static void addNew(RelativeLayout relativeLayout){
         if (dongHo !=null){
             db_DongHo.push().setValue(dongHo);
-//            Snackbar.make(relativeLayout,"Sản phẩm "+dongHo.getName()+ " đã được thêm mới ", Snackbar.LENGTH_LONG ).show();
+            Snackbar.make(relativeLayout,"Sản phẩm "+dongHo.getName()+ " đã được thêm mới ", Snackbar.LENGTH_LONG ).show();
 
 
         }
