@@ -48,7 +48,7 @@ public class UpdatDongHoActivity extends AppCompatActivity {
         edtBaohanh.setText(dongHo.getBaoHanh());
         edtBrand.setText(dongHo.getThuongHieu());
         edtDaydeo.setText(dongHo.getDayDeo());
-        edtDis.setText(dongHo.getDiscount());
+//        edtDis.setText(dongHo.getDiscount());
         edtPrice.setText(dongHo.getGia());
         edtKichthuoc.setText(dongHo.getSize());
         edtXuatxu.setText(dongHo.getXuatXu());
@@ -60,7 +60,7 @@ public class UpdatDongHoActivity extends AppCompatActivity {
                 dongHo.setBaoHanh(edtBaohanh.getText().toString());
                 dongHo.setThuongHieu(edtBrand.getText().toString());
                 dongHo.setDayDeo(edtDaydeo.getText().toString());
-                dongHo.setDiscount(edtDis.getText().toString());
+//                dongHo.setDiscount(edtDis.getText().toString());
                 dongHo.setGia(edtPrice.getText().toString());
                 dongHo.setSize(edtKichthuoc.getText().toString());
                 dongHo.setXuatXu(edtXuatxu.getText().toString());

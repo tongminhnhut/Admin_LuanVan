@@ -20,6 +20,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.jaredrummler.materialspinner.MaterialSpinner;
 import com.tongminhnhut.admin_luanvan.Model.Category;
 import com.tongminhnhut.admin_luanvan.Model.DongHo;
 
@@ -33,10 +34,10 @@ public class DongHoDAL {
 //            ,
 
     public static void upLoadImage(final String menuId, final Uri saveUri, final Context context, final EditText edtName,
-            final EditText edtXuatxu,final EditText edtDiscount,final EditText edtPrice,final EditText edtBrand,
-                                   final EditText edtBaohanh,final EditText edtDaydeo,final EditText edtMay,
-                                    final EditText edtSize,
-                                    final ProgressDialog progressDialog) {
+                                   final EditText edtXuatxu, final MaterialSpinner spinner, final EditText edtPrice, final EditText edtBrand,
+                                   final EditText edtBaohanh, final EditText edtDaydeo, final EditText edtMay,
+                                   final EditText edtSize,
+                                   final ProgressDialog progressDialog) {
         if (saveUri != null)
         {
 
@@ -59,7 +60,7 @@ public class DongHoDAL {
                             dongHo.setGia(edtPrice.getText().toString());
                             dongHo.setThuongHieu(edtBrand.getText().toString());
                             dongHo.setXuatXu(edtXuatxu.getText().toString());
-                            dongHo.setDiscount(edtDiscount.getText().toString());
+                            dongHo.setPriceId(String.valueOf(spinner.getSelectedIndex()));
                             dongHo.setBaoHanh(edtBaohanh.getText().toString());
                             dongHo.setSize(edtSize.getText().toString());
                             dongHo.setDayDeo(edtDaydeo.getText().toString());

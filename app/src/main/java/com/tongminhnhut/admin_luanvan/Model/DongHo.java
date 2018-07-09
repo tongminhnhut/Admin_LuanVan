@@ -6,7 +6,7 @@ public class DongHo implements Serializable {
     private String Name;
     private String Image ;
     private String Gia;
-    private String Discount;
+    private String PriceId;
     private String XuatXu;
     private String BaoHanh;
     private String Size;
@@ -20,11 +20,11 @@ public class DongHo implements Serializable {
     public DongHo() {
     }
 
-    public DongHo(String name, String image, String gia, String discount, String xuatXu, String baoHanh, String size, String thuongHieu, String may, String dayDeo, String menuId, String brandId) {
+    public DongHo(String name, String image, String gia, String priceId, String xuatXu, String baoHanh, String size, String thuongHieu, String may, String dayDeo, String menuId, String brandId) {
         Name = name;
         Image = image;
         Gia = gia;
-        Discount = discount;
+        PriceId = priceId;
         XuatXu = xuatXu;
         BaoHanh = baoHanh;
         Size = size;
@@ -59,12 +59,12 @@ public class DongHo implements Serializable {
         Gia = gia;
     }
 
-    public String getDiscount() {
-        return Discount;
+    public String getPriceId() {
+        return PriceId;
     }
 
-    public void setDiscount(String discount) {
-        Discount = discount;
+    public void setPriceId(String priceId) {
+        PriceId = priceId;
     }
 
     public String getXuatXu() {

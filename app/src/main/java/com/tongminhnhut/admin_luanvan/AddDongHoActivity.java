@@ -59,19 +59,19 @@ public class AddDongHoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ProgressDialog progressDialog = new ProgressDialog(AddDongHoActivity.this);
-                DongHoDAL.upLoadImage(id, saveUri,getApplicationContext(),
-                        edtName,
-                        edtXuatxu,
-                        edtDis,
-                        edtPrice,
-                        edtBrand,
-                        edtBaohanh,
-                        edtDaydeo,
-                        edtMay,
-                        edtKichthuoc,
-                        progressDialog
-
-                );
+//                DongHoDAL.upLoadImage(id, saveUri,getApplicationContext(),
+//                        edtName,
+//                        edtXuatxu,
+//                        edtDis,
+//                        edtPrice,
+//                        edtBrand,
+//                        edtBaohanh,
+//                        edtDaydeo,
+//                        edtMay,
+//                        edtKichthuoc,
+//                        progressDialog
+//
+//                );
             }
         });
         btnNo.setOnClickListener(new View.OnClickListener() {

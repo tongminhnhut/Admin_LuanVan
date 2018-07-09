@@ -16,10 +16,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.jaredrummler.materialspinner.MaterialSpinner;
 import com.tongminhnhut.admin_luanvan.BLL.CheckConnection;
 import com.tongminhnhut.admin_luanvan.BLL.Common;
 import com.tongminhnhut.admin_luanvan.DAL.DongHoDAL;
@@ -27,6 +29,7 @@ import com.tongminhnhut.admin_luanvan.DAL.LoadDongHoDAL;
 import com.tongminhnhut.admin_luanvan.Model.DongHo;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import info.hoang8f.widget.FButton;
 
@@ -36,8 +39,9 @@ public class DongHoActivity extends AppCompatActivity {
     RecyclerView.LayoutManager layoutManager;
     String menuId ="";
     FloatingActionButton btnAdd;
-    EditText edtName, edtPrice, edtBrand, edtXuatxu, edtKichthuoc, edtBaohanh, edtMay, edtDaydeo, edtDis;
+    EditText edtName, edtPrice, edtBrand, edtXuatxu, edtKichthuoc, edtBaohanh, edtMay, edtDaydeo;
     FButton btnUpload, btnSelect , btnYes;
+    MaterialSpinner spinner;
 
     Uri saveUri;
     RelativeLayout relativeLayout;
@@ -148,7 +152,15 @@ public class DongHoActivity extends AppCompatActivity {
         edtPrice = view.findViewById(R.id.edtPrice_dialogAddDH);
         edtXuatxu = view.findViewById(R.id.edtXuatxu_dialogAddDH);
         edtMay = view.findViewById(R.id.edtMay_dialogAddDH);
-        edtDis = view.findViewById(R.id.edtDiscount_dialogAddDH);
+        spinner = view.findViewById(R.id.spinner_Price);
+
+        List<String> listPrice = new ArrayList<>();
+        ArrayAdapter<String> adapterSpinner = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, listPrice);
+        adapterSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        listPrice.add("Dưới 1 triệu");
+        listPrice.add("Từ 2 triệu - 3 triệu");
+        listPrice.add("Từ 4 triệu - 6 triệu");
+        spinner.setAdapter(adapterSpinner);
 
         btnUpload.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -156,14 +168,14 @@ public class DongHoActivity extends AppCompatActivity {
                 ProgressDialog progressDialog = new ProgressDialog(DongHoActivity.this);
                 DongHoDAL.upLoadImage(menuId, saveUri,getApplicationContext(),
                         edtName,
+                        edtXuatxu,
+                        spinner,
                         edtPrice,
                         edtBrand,
-                        edtXuatxu,
-                        edtDis,
                         edtBaohanh,
-                        edtKichthuoc,
                         edtDaydeo,
                         edtMay,
+                        edtKichthuoc,
                         progressDialog
                         );
 //                DongHoDAL.addNew(relativeLayout);
@@ -258,9 +270,8 @@ public class DongHoActivity extends AppCompatActivity {
         edtPrice = view.findViewById(R.id.edtPrice_dialogAddDH);
         edtXuatxu = view.findViewById(R.id.edtXuatxu_dialogAddDH);
         edtMay = view.findViewById(R.id.edtMay_dialogAddDH);
-        edtDis = view.findViewById(R.id.edtDiscount_dialogAddDH);
 
-        edtDis.setText(item.getDiscount());
+        spinner.setText(item.getPriceId());
         edtMay.setText(item.getMay());
         edtXuatxu.setText(item.getXuatXu());
         edtPrice.setText(item.getGia());
@@ -290,7 +301,7 @@ public class DongHoActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
-                item.setDiscount(edtDis.getText().toString());
+                item.setPriceId(String.valueOf(spinner.getSelectedIndex()));
                 item.setMay(edtMay.getText().toString());
                 item.setXuatXu(edtXuatxu.getText().toString());
                 item.setGia(edtPrice.getText().toString());
