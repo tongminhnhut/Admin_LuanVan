@@ -27,8 +27,6 @@ import com.tongminhnhut.admin_luanvan.Model.Notification;
 import com.tongminhnhut.admin_luanvan.Model.RequestOrder;
 import com.tongminhnhut.admin_luanvan.Model.Sender;
 import com.tongminhnhut.admin_luanvan.Model.Token;
-import com.tongminhnhut.admin_luanvan.Model_ViewHolder.Status1_model;
-import com.tongminhnhut.admin_luanvan.Model_ViewHolder.Status2_model;
 import com.tongminhnhut.admin_luanvan.R;
 import com.tongminhnhut.admin_luanvan.Remote.APIService;
 import com.tongminhnhut.admin_luanvan.ViewHolder.OrderViewHolder;
@@ -70,17 +68,18 @@ public class Status1 {
                         context.startActivity(orderDetail);
                     }
                 });
-                holder.btnUpdate.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        adapter.getItem(position).setStatus("1");
-                        db_Request.child(adapter.getRef(position).getKey()).setValue(adapter.getItem(position));
-                        sendOrderStatusToUser(adapter.getRef(position).getKey(),model,mService,context );
-                        adapter.notifyDataSetChanged();
-
-
-                    }
-                });
+                holder.btnUpdate.setEnabled(false);
+//                holder.btnUpdate.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        adapter.getItem(position).setStatus("1");
+//                        db_Request.child(adapter.getRef(position).getKey()).setValue(adapter.getItem(position));
+//                        sendOrderStatusToUser(adapter.getRef(position).getKey(),model,mService,context );
+//                        adapter.notifyDataSetChanged();
+//
+//
+//                    }
+//                });
 
                 holder.btnxoa.setOnClickListener(new View.OnClickListener() {
                     @Override
