@@ -47,6 +47,8 @@ public class DongHoActivity extends AppCompatActivity {
     RelativeLayout relativeLayout;
     private final int PICK_IMAGE_REQUEST = 71;
     AlertDialog.Builder alertDialog;
+    ArrayAdapter<String> adapterSpinner;
+    List<String> listPrice;
 
 
     @Override
@@ -154,8 +156,8 @@ public class DongHoActivity extends AppCompatActivity {
         edtMay = view.findViewById(R.id.edtMay_dialogAddDH);
         spinner = view.findViewById(R.id.spinner_Price);
 
-        List<String> listPrice = new ArrayList<>();
-        ArrayAdapter<String> adapterSpinner = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, listPrice);
+        listPrice = new ArrayList<>();
+        adapterSpinner = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, listPrice);
         adapterSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         listPrice.add("Dưới 1 triệu");
         listPrice.add("Từ 2 triệu - 3 triệu");
@@ -270,8 +272,17 @@ public class DongHoActivity extends AppCompatActivity {
         edtPrice = view.findViewById(R.id.edtPrice_dialogAddDH);
         edtXuatxu = view.findViewById(R.id.edtXuatxu_dialogAddDH);
         edtMay = view.findViewById(R.id.edtMay_dialogAddDH);
+        spinner = view.findViewById(R.id.spinner_Price);
 
-        spinner.setText(item.getPriceId());
+        listPrice = new ArrayList<>();
+        adapterSpinner = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, listPrice);
+        adapterSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        listPrice.add("Dưới 1 triệu");
+        listPrice.add("Từ 2 triệu - 3 triệu");
+        listPrice.add("Từ 4 triệu - 6 triệu");
+        spinner.setAdapter(adapterSpinner);
+        spinner.setSelectedIndex(Integer.parseInt(item.getPriceId()));
+
         edtMay.setText(item.getMay());
         edtXuatxu.setText(item.getXuatXu());
         edtPrice.setText(item.getGia());
