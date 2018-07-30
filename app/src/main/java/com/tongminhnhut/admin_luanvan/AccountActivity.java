@@ -3,6 +3,7 @@ package com.tongminhnhut.admin_luanvan;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -46,8 +47,8 @@ public class AccountActivity extends AppCompatActivity {
             public void onRefresh() {
 
                 if (CheckConnection.isConnectedInternet(getApplicationContext())){
-//                    Intent intent = new Intent(getApplicationContext(), DongHoActivity.class);
-                    LoadAccountDAL.loadAccount(getApplicationContext(),recyclerView,swipeRefreshLayout);
+                    Intent intent = new Intent(getApplicationContext(), AccountActivity.class);
+                    LoadAccountDAL.loadAccount(intent,getApplicationContext(),recyclerView,swipeRefreshLayout);
                 }else {
                     Toast.makeText(getApplicationContext(), "Vui lòng kiểm tra internet", Toast.LENGTH_SHORT).show();
                     return;
@@ -62,8 +63,8 @@ public class AccountActivity extends AppCompatActivity {
             public void run() {
 
                 if (CheckConnection.isConnectedInternet(getApplicationContext())){
-//                    Intent intent = new Intent(getApplicationContext(), DongHoActivity.class);
-                    LoadAccountDAL.loadAccount(getApplicationContext(),recyclerView,swipeRefreshLayout);
+                    Intent intent = new Intent(getApplicationContext(), AccountActivity.class);
+                    LoadAccountDAL.loadAccount(intent,getApplicationContext(),recyclerView,swipeRefreshLayout);
                 }else {
                     Toast.makeText(getApplicationContext(), "Vui lòng kiểm tra internet", Toast.LENGTH_SHORT).show();
                     return;

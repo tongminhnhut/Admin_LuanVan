@@ -44,16 +44,16 @@ public class SignUpActivity extends AppCompatActivity {
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (phone.isEmpty() || pass.isEmpty()||name.isEmpty() ){
+
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     SignUpDAL.signUp(intent,getApplicationContext(),
                             edtPhone,
                             edtPass,
                             edtName,
                             dialog);
-                }
 
-                finish();
+
+//                finish();
             }
         });
 

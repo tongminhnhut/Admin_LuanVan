@@ -23,18 +23,27 @@ public class SignUpDAL {
         db_User.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.child(phone.getText().toString().trim()).exists()){
+                final String sdt = phone.getText().toString();
+                final String mk = pass.getText().toString();
+                final String ten = name.getText().toString();
+                if (sdt.isEmpty() || mk.isEmpty() || ten.isEmpty()){
                     dialog.dismiss();
-//                    Toast.makeText(context, "Tài khoản đã tồn tại !", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Vui lòng điền đầy đủ", Toast.LENGTH_SHORT).show();
                 }else {
-                    dialog.dismiss();
-                    User user = new User(name.getText().toString().trim(), MD5.md5(pass.getText().toString().trim()));
-                    db_User.child(phone.getText().toString().trim()).setValue(user);
-                    Toast.makeText(context, "Đăng ký thành công !", Toast.LENGTH_SHORT).show();
-                    intent.addFlags(intent.FLAG_ACTIVITY_NEW_TASK);
-                    context.startActivity(intent);
+                    if (dataSnapshot.child(phone.getText().toString().trim()).exists()){
+                        dialog.dismiss();
+//                    Toast.makeText(context, "Tài khoản đã tồn tại !", Toast.LENGTH_SHORT).show();
+                    }else {
+                        dialog.dismiss();
+                        User user = new User(name.getText().toString().trim(), MD5.md5(pass.getText().toString().trim()));
+                        db_User.child(phone.getText().toString().trim()).setValue(user);
+                        Toast.makeText(context, "Đăng ký thành công !", Toast.LENGTH_SHORT).show();
+                        intent.addFlags(intent.FLAG_ACTIVITY_NEW_TASK);
+                        context.startActivity(intent);
 
+                    }
                 }
+
             }
 
             @Override

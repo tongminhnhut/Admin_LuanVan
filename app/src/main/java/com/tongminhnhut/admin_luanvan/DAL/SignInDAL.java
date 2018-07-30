@@ -30,7 +30,7 @@ public class SignInDAL {
                     user.setPhone(phone);
                     if (Boolean.parseBoolean(user.getIsStaff())){
                         if (user.getPassword().equals(MD5.md5(pass))){
-                            Toast.makeText(context, "Đăng nhập thành công !", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(context, "Đăng nhập thành công !", Toast.LENGTH_SHORT).show();
                             intent.setFlags(intent.FLAG_ACTIVITY_NEW_TASK);
                             currentUser = user;
                             context.startActivity(intent);

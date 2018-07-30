@@ -3,6 +3,7 @@ package com.tongminhnhut.admin_luanvan.DAL;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
@@ -11,9 +12,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.tongminhnhut.admin_luanvan.AccountActivity;
@@ -27,7 +30,7 @@ public class LoadAccountDAL extends AccountActivity {
     public static FirebaseRecyclerAdapter<User, AccountViewHolder> adapter ;
     static AlertDialog.Builder dialog ;
 
-    public static void loadAccount(final Context context,final RecyclerView recyclerView, final SwipeRefreshLayout swipeRefreshLayout){
+    public static void loadAccount(final Intent intent, final Context context, final RecyclerView recyclerView, final SwipeRefreshLayout swipeRefreshLayout){
         FirebaseRecyclerOptions<User> options = new FirebaseRecyclerOptions.Builder<User>()
                 .setQuery(db_User, User.class)
                 .build();
