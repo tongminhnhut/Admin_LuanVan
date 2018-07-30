@@ -37,14 +37,6 @@ public class LoadAccountDAL extends AccountActivity {
                 holder.txtPhone.setText(String.format("Số điện thoại : %s",adapter.getRef(position).getKey()));
                 holder.txtName.setText(String.format("Tên : %s ", model.getName()));
                 holder.txtPhanquyen.setText(String.format("Cấp bậc : %s", ConvertToStatus.convertToAccount(Boolean.parseBoolean(model.getIsStaff()))));
-                holder.btnPhanquyen.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        adapter.getItem(position).setIsStaff("true");
-                        db_User.child(adapter.getRef(position).getKey()).setValue(adapter.getItem(position));
-                        adapter.notifyDataSetChanged();
-                    }
-                });
                 holder.btnXoa.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

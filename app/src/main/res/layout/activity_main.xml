@@ -33,17 +33,6 @@
             app:fButtonColor="@color/btnSignIn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-        <info.hoang8f.widget.FButton
-            android:id="@+id/btnSignUp"
-            app:cornerRadius="4dp"
-            android:layout_margin="8dp"
-            app:shadowEnabled="true"
-            android:text="Sign Up"
-            app:shadowHeight="5dp"
-            android:layout_weight="1"
-            app:fButtonColor="@color/btnSignUp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
 
     </LinearLayout>
 

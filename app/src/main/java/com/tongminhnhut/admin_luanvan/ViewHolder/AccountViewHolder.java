@@ -12,14 +12,13 @@ import info.hoang8f.widget.FButton;
 
 public class AccountViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener  {
     public TextView txtPhone, txtName, txtPhanquyen ;
-    public FButton btnPhanquyen, btnXoa ;
+    public FButton  btnXoa ;
     public AccountViewHolder(View itemView) {
         super(itemView);
 
         txtPhone =itemView.findViewById(R.id.txtPhone_itemAccount);
         txtName = itemView.findViewById(R.id.txtTen_itemAccount);
         txtPhanquyen = itemView.findViewById(R.id.txtPhanquyen_itemAccount);
-        btnPhanquyen = itemView.findViewById(R.id.btnPhanquyen_itemAccount);
         btnXoa = itemView.findViewById(R.id.btnDelete_itemAccount);
 
         itemView.setOnCreateContextMenuListener(this

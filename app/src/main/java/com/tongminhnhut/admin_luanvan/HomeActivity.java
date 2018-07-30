@@ -362,6 +362,8 @@ public class HomeActivity extends AppCompatActivity
         }else if (id == R.id.nav_banner) {
             startActivity(new Intent(getApplicationContext(), BannerrActivity.class));
 
+        }else if (id == R.id.nav_QuanlyAddNew) {
+            startActivity(new Intent(getApplicationContext(), SignUpActivity.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
