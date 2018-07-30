@@ -40,7 +40,8 @@ public class SignInDAL {
                     }else {
                         Toast.makeText(context, "Tài khoản này không phải là quản lý !", Toast.LENGTH_SHORT).show();
                     }
-                }else {
+                }
+                else {
                     dialog.dismiss();
                     Toast.makeText(context, "Tài khoản không tồn tại !", Toast.LENGTH_SHORT).show();
                 }

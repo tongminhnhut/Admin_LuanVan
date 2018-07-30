@@ -1,5 +1,6 @@
 package com.tongminhnhut.admin_luanvan;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -43,11 +44,16 @@ public class SignUpActivity extends AppCompatActivity {
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SignUpDAL.signUp(getApplicationContext(),
-                        edtPhone,
-                        edtPass,
-                        edtName,
-                        dialog);
+                if (phone.isEmpty() || pass.isEmpty()||name.isEmpty() ){
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    SignUpDAL.signUp(intent,getApplicationContext(),
+                            edtPhone,
+                            edtPass,
+                            edtName,
+                            dialog);
+                }
+
+                finish();
             }
         });
 

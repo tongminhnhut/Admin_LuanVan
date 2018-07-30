@@ -40,12 +40,17 @@ public class SignInActivity extends AppCompatActivity {
                 String pass = edtPass.getText().toString();
                 final SpotsDialog dialog = new SpotsDialog(SignInActivity.this, "Loading . . .");
                 if (CheckConnection.isConnectedInternet(getApplicationContext())){
-                    if (cb.isChecked()){
-                        Paper.book().write(Common.USER_KEY,edtPhone.getText().toString());
-                        Paper.book().write(Common.PWD_KEY, edtPass.getText().toString());
+                    if (phone.isEmpty() || pass.isEmpty()){
+                        Toast.makeText(SignInActivity.this, "Vui lòng nhập đầy đủ", Toast.LENGTH_SHORT).show();
+                    }else {
+                        if (cb.isChecked()){
+                            Paper.book().write(Common.USER_KEY,edtPhone.getText().toString());
+                            Paper.book().write(Common.PWD_KEY, edtPass.getText().toString());
+                        }
+                        Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                        SignInDAL.signIn(getApplicationContext(),phone, pass, dialog, intent);
                     }
-                    Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
-                    SignInDAL.signIn(getApplicationContext(),phone, pass, dialog, intent);
+                    
                 } else {
                     Toast.makeText(SignInActivity.this, "Vui lòng kiểm tra kết nối !", Toast.LENGTH_SHORT).show();
                 }
